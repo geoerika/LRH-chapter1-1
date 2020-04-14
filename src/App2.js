@@ -31,8 +31,9 @@ function MyName () {
 
   return (
     <div>
-      <h1>My name is: { name } { lastName} </h1>
+      <h1>My name is: { name } { lastName }</h1>
         <input type='text' value={ name } onChange={ handleChange } />
+        <br/>
         <input type='text' value={lastName} onChange={handleLastNameChange} />
     </div>
 
