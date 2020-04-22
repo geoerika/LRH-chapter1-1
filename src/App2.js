@@ -5,9 +5,9 @@ let values = []
 let currentHook = 0
 
 function useState (initialState) {
-  let hookIndex = currentHook
-  if (typeof values[currentHook] === 'undefined') values[currentHook] = initialState
 
+  if (typeof values[currentHook] === 'undefined') values[currentHook] = initialState
+  let hookIndex = currentHook
   function setState (nextValue) {
     values[hookIndex] = nextValue
     ReactDOM.render(<MyName />, document.getElementById('root'))
@@ -21,6 +21,7 @@ function MyName () {
   currentHook = 0
   const [name, setName] = useState('')
   const [lastName, setLastName ] = useState('')
+  const [enableFirstName, setEnableFirstName] = useState(false)
 
   const handleChange = (evt) => {
     setName(evt.target.value)
@@ -29,12 +30,17 @@ function MyName () {
     setLastName(evt.target.value)
   }
 
+  const handleEnableChange = (evt) => {
+    setEnableFirstName(!enableFirstName)
+  }
+
   return (
     <div>
-      <h1>My name is: { name } { lastName }</h1>
-        <input type='text' value={ name } onChange={ handleChange } />
-        <br/>
-        <input type='text' value={lastName} onChange={handleLastNameChange} />
+      <h1>My name is: { enableFirstName ? name : '' } { lastName }</h1>
+      <input type='checkbox' value={enableFirstName} onChange={ handleEnableChange } />
+      <input type='text' value={ name } onChange={ handleChange } />
+      <br/>
+      <input type='text' value={lastName} onChange={handleLastNameChange} />
     </div>
 
   )
